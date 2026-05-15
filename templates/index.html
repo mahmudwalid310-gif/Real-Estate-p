@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Hero Section with Search Box -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Discover Your <span>Perfect</span> Home</h1>
+            <p>Search through thousands of luxury properties all over the world.</p>
+            
+            <!-- Modern Search Box -->
+            <form class="search-box" action="{{ url_for('index') }}" method="GET">
+                <div class="search-field">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" name="location" placeholder="Location" value="{{ request.args.get('location', '') }}">
+                </div>
+                <div class="search-field">
+                    <i class="fas fa-home"></i>
+                    <select name="type">
+                        <option>Property Type</option>
+                        <option {% if request.args.get('type') == 'Apartment' %}selected{% endif %}>Apartment</option>
+                        <option {% if request.args.get('type') == 'Villa' %}selected{% endif %}>Villa</option>
+                        <option {% if request.args.get('type') == 'Studio' %}selected{% endif %}>Studio</option>
+                    </select>
+                </div>
+                <div class="search-field">
+                    <i class="fas fa-dollar-sign"></i>
+                    <input type="text" name="max_price" placeholder="Max Price" value="{{ request.args.get('max_price', '') }}">
+                </div>
+                <button type="submit" class="btn-search">Search Now</button>
+            </form>
+        </div>
+    </header>
+
+    <!-- Category Section -->
+    <section class="categories container">
+        <div class="section-title">
+            <h2>Browse by Category</h2>
+        </div>
+        <div class="cat-grid">
+            <div class="cat-card"><i class="fas fa-building"></i> <p>Apartments</p></div>
+            <div class="cat-card"><i class="fas fa-house-chimney"></i> <p>Villas</p></div>
+            <div class="cat-card"><i class="fas fa-city"></i> <p>Commercial</p></div>
+            <div class="cat-card"><i class="fas fa-mountain-sun"></i> <p>Land</p></div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us container">
+        <div class="section-title">
+            <h2>Why Choose Elite Realty?</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-item">
+                <i class="fas fa-shield-check"></i>
+                <h4>Verified Properties</h4>
+                <p>Every listing on our platform is manually verified by our legal team.</p>
+            </div>
+            <div class="why-item">
+                <i class="fas fa-hand-holding-dollar"></i>
+                <h4>Best Prices</h4>
+                <p>We guarantee the most competitive market prices without hidden costs.</p>
+            </div>
+            <div class="why-item">
+                <i class="fas fa-headset"></i>
+                <h4>24/7 Support</h4>
+                <p>Our dedicated agents are always ready to assist you in your journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats container">
+        <div class="stat-item">
+            <h2>1200+</h2>
+            <p>Premium Properties</p>
+        </div>
+        <div class="stat-item">
+            <h2>450+</h2>
+            <p>Happy Families</p>
+        </div>
+        <div class="stat-item">
+            <h2>120+</h2>
+            <p>Award Wins</p>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <main class="container">
+        <div class="section-title">
+            <h2>Featured Properties</h2>
+            <p>Handpicked properties just for you</p>
+        </div>
+
+        <div class="property-grid">
+            {% for prop in properties %}
+            <div class="card">
+                <div class="card-img">
+                    <span class="badge">For {{ prop.prop_type }}</span>
+                    <img src="{{ url_for('static', filename='image/' + prop.image_url) }}" alt="Home">
+                </div>
+                <div class="card-info">
+                    <p class="price">{{ prop.price }}</p>
+                    <h3>{{ prop.title }}</h3>
+                    <p class="loc"><i class="fas fa-location-dot"></i> {{ prop.location }}</p>
+                    <div class="features">
+                        <span><i class="fas fa-bed"></i> {{ prop.beds }}</span>
+                        <span><i class="fas fa-bath"></i> {{ prop.baths }}</span>
+                        <span><i class="fas fa-maximize"></i> {{ prop.sqft }} sqft</span>
+                    </div>
+                    <a href="{{ url_for('property_details', id=prop.id) }}" class="btn-view">Details</a>
+                </div>
+            </div>
+            {% else %}
+            <p>No properties found matching your criteria.</p>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

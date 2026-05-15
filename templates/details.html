@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ property.title }} | E-FOR-RENT Realty{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="container main-details">
+            <!-- Left Side: Images & Info -->
+            <div class="details-left">
+                <div class="gallery">
+                    <img src="{{ url_for('static', filename='image/' + property.image_url) }}" id="mainImg" class="main-img-large">
+                    <div class="thumb-grid">
+                        <img src="{{ url_for('static', filename='image/' + property.image_url) }}" onclick="document.getElementById('mainImg').src=this.src">
+                        <img src="https://images.unsplash.com/photo-1600607687940-c52af0369996?auto=format&fit=crop&w=200&q=80" onclick="document.getElementById('mainImg').src=this.src">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?auto=format&fit=crop&w=200&q=80" onclick="document.getElementById('mainImg').src=this.src">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=200&q=80" onclick="document.getElementById('mainImg').src=this.src">
+                    </div>
+                </div>
+
+                <div class="property-header">
+                    <h1>{{ property.title }}</h1>
+                    <p class="location-text"><i class="fas fa-map-marker-alt"></i> {{ property.location }}</p>
+                    <div class="main-features">
+                        <div class="f-item"><i class="fas fa-bed"></i> {{ property.beds }} Bedrooms</div>
+                        <div class="f-item"><i class="fas fa-bath"></i> {{ property.baths }} Bathrooms</div>
+                        <div class="f-item"><i class="fas fa-car"></i> 2 Garage</div>
+                        <div class="f-item"><i class="fas fa-ruler-combined"></i> {{ property.sqft }} sqft</div>
+                    </div>
+                </div>
+
+                <div class="description-section">
+                    <h3>About this Property</h3>
+                    <p>{{ property.description }}</p>
+                    
+                    <h3 style="margin-top: 30px;">Amenities</h3>
+                    <ul class="amenities-list">
+                        <li><i class="fas fa-check-circle"></i> Central Air Conditioning</li>
+                        <li><i class="fas fa-check-circle"></i> Security System</li>
+                        <li><i class="fas fa-check-circle"></i> Smart Home Features</li>
+                        <li><i class="fas fa-check-circle"></i> Private Garden</li>
+                        <li><i class="fas fa-check-circle"></i> Outdoor Kitchen</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side: Contact Sidebar -->
+            <div class="details-right">
+                <div class="agent-card">
+                    <div class="price-tag" style="background-color: var(--primary); color: white; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 1.2rem; text-align: center;">{{ property.price }}</div>
+                    <hr>
+                    <h4>Interested in this property?</h4>
+                    <div class="agent-info">
+                        <img src="https://i.pravatar.cc/60" class="agent-img">
+                        <div>
+                            <strong>John Doe</strong>
+                            <p>Senior Estate Agent</p>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="Your Full Name">
+                        <input type="email" placeholder="Your Email">
+                        <textarea placeholder="Write your message..."></textarea>
+                        <button type="submit" class="btn-primary-alt" style="width: 100%; padding: 12px; background: var(--secondary); color: white; border: none; border-radius: 5px; cursor: pointer;">Send Message</button>
+                    </form>
+                    <button class="btn-whatsapp" style="width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 5px; margin-top: 10px; cursor: pointer;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

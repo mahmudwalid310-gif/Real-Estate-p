@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Property | Admin{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px; margin: 50px auto;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Add New Property</h2>
+
+    <form method="POST" action="{{ url_for('add_property') }}" enctype="multipart/form-data">
+        <div style="margin-bottom: 15px;">
+            <label>Title</label>
+            <input type="text" name="title" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+            <div style="flex: 1;">
+                <label>Price (e.g. $500,000)</label>
+                <input type="text" name="price" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="flex: 1;">
+                <label>Type</label>
+                <select name="prop_type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="Sale">Sale</option>
+                    <option value="Rent">Rent</option>
+                </select>
+            </div>
+            <div style="flex: 1;">
+                <label>Category</label>
+                <select name="category" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="Apartment">Apartment</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Studio">Studio</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Location</label>
+            <input type="text" name="location" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+            <div style="flex: 1;">
+                <label>Beds</label>
+                <input type="number" name="beds" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="flex: 1;">
+                <label>Baths</label>
+                <input type="number" name="baths" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            <div style="flex: 1;">
+                <label>Sqft</label>
+                <input type="number" name="sqft" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Upload Property Image</label>
+            <input type="file" name="image_file" accept="image/*" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Description</label>
+            <textarea name="description" rows="5" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+        </div>
+        
+        <button type="submit" class="btn-main" style="width: 100%;">Save Property</button>
+        <a href="{{ url_for('admin') }}" style="display: block; text-align: center; margin-top: 15px; color: #777;">Cancel</a>
+    </form>
+</div>
+{% endblock %}
